@@ -22,8 +22,7 @@ def getplayerlist(driver,pagen):
             driver.get(b_url)
             allprobs = driver.find_elements_by_class_name("prob")
             int(allprobs[0].text[0:2])
-            int(allprobs[2].text[0:2])
-            aaa = len(allprobs)
+            aaa = allprobs[2].text[0:2]
             
     return aaa
 
