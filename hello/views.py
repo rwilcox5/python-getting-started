@@ -20,14 +20,8 @@ def getplayerlist(driver,pagen):
             alldays = []
             b_url = "http://projects.fivethirtyeight.com/2016-mlb-predictions/"+allteams[nstars].lower()
             driver.get(b_url)
-            allprobs = driver.find_elements_by_class_name("prob")
-            int(allprobs[0].text[0:2])
-            for i in allprobs:
-                try:
-                    int(i.text[0:2])
-                    aaa.append(i.text)
-                except:
-                    pass
+            aaa = driver.page_source.encode("utf-8")
+
     return aaa
 
 
