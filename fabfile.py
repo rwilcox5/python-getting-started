@@ -49,7 +49,7 @@ def getplayerlist(driver,pagen):
             
             all538.append([allteams[nstars], p538prob0, allpitchers[0].text, p538prob1, allpitchers[2].text])
 
-    teamslist = ['cardinals','Astros','Athletics','Jays','Braves','Brewers','Cardinals','Cubs','Diamondbacks','Dodgers','Giants','Indians','Mariners','Marlins','Mets','Nationals','Orioles','Padres','Phillies','Pirates','Rangers','Rays','Red Sox','Reds','Rockies','Royals','Tigers','Twins','White Sox','Yankees']
+    teamslist = ['Angels','Astros','Athletics','Jays','Braves','Brewers','Cardinals','Cubs','Diamondbacks','Dodgers','Giants','Indians','Mariners','Marlins','Mets','Nationals','Orioles','Padres','Phillies','Pirates','Rangers','Rays','Red Sox','Reds','Rockies','Royals','Tigers','Twins','White Sox','Yankees']
     
     b_url = "https://www.5dimes.eu"
     driver.get(b_url)
