@@ -3,7 +3,9 @@ from django.http import HttpResponse
 
 from .models import Greeting
 import selenium
-
+from selenium import webdriver
+mydriver = webdriver.PhantomJS()
+mydriver.close()
 # Create your views here.
 def index(request):
     # return HttpResponse('Hello from Python!')
