@@ -32,18 +32,19 @@ def getplayerlist(driver,pagen):
     pvsa = []
     allteams = ['Angels','Astros','Athletics','Blue-Jays','Braves','Brewers','Cardinals','Cubs','Diamondbacks','Dodgers','Giants','Indians','Mariners','Marlins','Mets','Nationals','Orioles','Padres','Phillies','Pirates','Rangers','Rays','Red-Sox','Reds','Rockies','Royals','Tigers','Twins','White-Sox','Yankees']
     all538 = []
-    for nstars in range(0,3):
+    for nstars in range(0,10):
             allprobsa = []
             allres = []
             alldays = []
             b_url = "http://projects.fivethirtyeight.com/2016-mlb-predictions/"+allteams[nstars].lower()
             driver.get(b_url)
             allprobs = driver.find_elements_by_class_name("prob")
+            proarr = []
             for i in allprobs:
-                    proo = str(i.get_attribute('outerHTML'))
-                    aparr.append([proo])
-            p538prob0 = 100./int(allprobs[0].text[0:2])
-            p538prob1 = 100./int(50)
+                    proo = str(i.get_attribute('innerHTML'))
+                    proarr.append(proo)
+            p538prob0 = 100./int(proarr[0][0:2])
+            p538prob1 = 100./int(proarr[2][0:2])
             allpitchers = driver.find_elements_by_class_name("pitcher")
             
             all538.append([allteams[nstars], p538prob0, allpitchers[0].text, p538prob1, allpitchers[2].text])
@@ -71,7 +72,7 @@ def getplayerlist(driver,pagen):
             allrows.append(i)
     allgames = []
     allgamesodds = []
-    for nstars in range(0,3):
+    for nstars in range(0,10):
             nlines = []
             irow = 0
             for eachrow in allrowst:
@@ -159,6 +160,7 @@ def getplayerlist(driver,pagen):
                                     
                             
             if len(nlines)>4:
+                    aparr.append(nlines)
                     p1 = str(all538[nstars][2])
                     p2 = str(all538[nstars][4])
                     p1i = p1.find(' ')
