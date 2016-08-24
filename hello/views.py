@@ -12,7 +12,7 @@ p538prob0 = 100./int(allprobs[0].text[0:2])
 driver.close()
 # Create your views here.
 def index(request):
-    return HttpResponse('Hello from Python!')
+    return HttpResponse(str(p538prob0))
     #return render(request, 'index.html')
 
 
