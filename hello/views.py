@@ -16,7 +16,7 @@ def writecsv(parr, filen):
                         except:
                                 print parr[i], i
         print "hhh"
-writecsv([[a,b],[c,d],[a,c]],'testcsv.csv')
+writecsv([['a','b'],['c','d'],['a','c']],'testcsv.csv')
 
 def getplayerlist(driver,pagen):
     plist = []
