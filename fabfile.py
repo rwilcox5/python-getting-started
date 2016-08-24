@@ -1,5 +1,5 @@
 from fabric.api import task
 
 @task
-def run_it():
+def run_bets():
     print 'done.'
