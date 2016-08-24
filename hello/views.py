@@ -4,8 +4,19 @@ from django.http import HttpResponse
 from .models import Greeting
 import math
 import selenium
+import csv
 from selenium import webdriver
-
+def writecsv(parr, filen):
+        print "hiii"
+        with open(filen, 'wb') as csvfile:
+                spamwriter = csv.writer(csvfile, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
+                for i in range(0,len(parr)):
+                        try:
+                                spamwriter.writerow(parr[i])
+                        except:
+                                print parr[i], i
+        print "hhh"
+writecsv([[a,b],[c,d],[a,c]],'testcsv.csv')
 
 def getplayerlist(driver,pagen):
     plist = []
