@@ -13,7 +13,7 @@ def getplayerlist(driver,pagen):
     pvsa = []
     allteams = ['cardinals','Astros','Athletics','Blue-Jays','Braves','Brewers','Cardinals','Cubs','Diamondbacks','Dodgers','Giants','Indians','Mariners','Marlins','Mets','Nationals','Orioles','Padres','Phillies','Pirates','Rangers','Rays','Red-Sox','Reds','Rockies','Royals','Tigers','Twins','White-Sox','Yankees']
     all538 = []
-    for nstars in range(0,2):
+    for nstars in range(0,1):
             allprobsa = []
             allres = []
             alldays = []
@@ -49,7 +49,7 @@ def getplayerlist(driver,pagen):
             allrows.append(i)
     allgames = []
     allgamesodds = []
-    for nstars in range(0,3):
+    for nstars in range(0,1):
             nlines = []
             irow = 0
             for eachrow in allrowst:
