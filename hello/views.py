@@ -20,8 +20,7 @@ def getplayerlist(driver,pagen):
             b_url = "http://projects.fivethirtyeight.com/2016-mlb-predictions/"+allteams[nstars].lower()
             driver.get(b_url)
             allprobs = driver.find_elements_by_class_name("prob")
-            for i in allprobs:
-                aaa.append(str(i.text))
+            aaa = len(allprobs)
             
     return aaa
 
