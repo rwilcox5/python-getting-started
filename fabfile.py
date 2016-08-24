@@ -11,7 +11,6 @@ from selenium import webdriver
 
 
 def writecsv(parr, filen):
-        print "hiii"
         with open(filen, 'wb') as csvfile:
                 spamwriter = csv.writer(csvfile, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
                 for i in range(0,len(parr)):
@@ -19,7 +18,6 @@ def writecsv(parr, filen):
                                 spamwriter.writerow(parr[i])
                         except:
                                 print parr[i], i
-        print "hhh"
 
 
 
@@ -32,18 +30,20 @@ def getplayerlist(driver,pagen):
     ap = []
     aparr = []
     pvsa = []
-    allteams = ['cardinals','Astros','Athletics','Blue-Jays','Braves','Brewers','Cardinals','Cubs','Diamondbacks','Dodgers','Giants','Indians','Mariners','Marlins','Mets','Nationals','Orioles','Padres','Phillies','Pirates','Rangers','Rays','Red-Sox','Reds','Rockies','Royals','Tigers','Twins','White-Sox','Yankees']
+    allteams = ['Angels','Astros','Athletics','Blue-Jays','Braves','Brewers','Cardinals','Cubs','Diamondbacks','Dodgers','Giants','Indians','Mariners','Marlins','Mets','Nationals','Orioles','Padres','Phillies','Pirates','Rangers','Rays','Red-Sox','Reds','Rockies','Royals','Tigers','Twins','White-Sox','Yankees']
     all538 = []
-    for nstars in range(0,1):
+    for nstars in range(0,3):
             allprobsa = []
             allres = []
             alldays = []
             b_url = "http://projects.fivethirtyeight.com/2016-mlb-predictions/"+allteams[nstars].lower()
             driver.get(b_url)
             allprobs = driver.find_elements_by_class_name("prob")
+            for i in allprobs:
+                    proo = str(i.get_attribute('outerHTML'))
+                    aparr.append([proo])
             p538prob0 = 100./int(allprobs[0].text[0:2])
             p538prob1 = 100./int(50)
-            print p538prob0
             allpitchers = driver.find_elements_by_class_name("pitcher")
             
             all538.append([allteams[nstars], p538prob0, allpitchers[0].text, p538prob1, allpitchers[2].text])
@@ -71,7 +71,7 @@ def getplayerlist(driver,pagen):
             allrows.append(i)
     allgames = []
     allgamesodds = []
-    for nstars in range(0,2):
+    for nstars in range(0,3):
             nlines = []
             irow = 0
             for eachrow in allrowst:
