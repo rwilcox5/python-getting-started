@@ -2,4 +2,4 @@ from fabric.api import task
 
 @task
 def run_bets():
-    print 'done.'
+    print 'done in one.'
