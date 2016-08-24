@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 
 from .models import Greeting
+import math
 import selenium
 from selenium import webdriver
 
@@ -20,6 +21,8 @@ def getplayerlist(driver,pagen):
             b_url = "http://projects.fivethirtyeight.com/2016-mlb-predictions/"+allteams[nstars].lower()
             driver.get(b_url)
             allprobs = driver.find_elements_by_class_name("prob")
+            int(allprobs[0].text[0:2])
+            int(allprobs[2].text[0:2])
             aaa = len(allprobs)
             
     return aaa
