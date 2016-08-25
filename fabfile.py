@@ -12,7 +12,7 @@ from selenium import webdriver
 
 def writecsv(parr, filen):
 
-        with open(filen, 'wb') as csvfile:
+        with open(filen, 'a') as csvfile:
                 spamwriter = csv.writer(csvfile, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
                 for i in range(0,len(parr)):
                         try:
@@ -29,6 +29,7 @@ def getplayerlist(driver,pagen):
     ap = []
     aparr = []
     pvsa = []
+    xtime = time.time()
     allteams = ['angels','Astros','Athletics','Blue-Jays','Braves','Brewers','Cardinals','Cubs','Diamondbacks','Dodgers','Giants','Indians','Mariners','Marlins','Mets','Nationals','Orioles','Padres','Phillies','Pirates','Rangers','Rays','Red-Sox','Reds','Rockies','Royals','Tigers','Twins','White-Sox','Yankees']
     all538 = []
     for nstars in range(0,30):
@@ -209,12 +210,16 @@ def getplayerlist(driver,pagen):
                                     #nlines.append(all538[nstars][4])
                                     #print nlines
                     #print nlines
-                    aparr.append(nlines)
+                    nlines0 = [xtime]
+                    for iin in nlines:
+                            nlines0.append(iin)
+                    aparr.append(nlines0)
+                    print nlines0
                     if len(nlines)>7:
                             #aparr.append(nlines)
                             #print 'a', nlines
-                            namestr = str(nlines[4])
-                            thebet = int(nlines[7]*100)*1./100
+                            namestr = str(nlines0[4])
+                            thebet = int(nlines0[7]*100)*1./100
                             try:
                                     bidbox = driver.find_element_by_name(namestr)
                                     bidbox.send_keys(str(thebet))
@@ -239,10 +244,10 @@ def run_bets():
     ftp.cwd('/htdocs/')
     ftp.retrlines('LIST')
     print 'done in one.'
-    xtime = time.time()
-    writecsv(allplayers,'allp'+str(xtime)+'.csv')
-    filename = 'allp'+str(xtime)+'.csv'
-    ftp.storbinary('STOR '+filename, open(filename, 'rb'))
+
+    writecsv(allplayers,'allp'+'.csv')
+    filename = 'allp'+'.csv'
+    ftp.storbinary('STOR '+filename, open(filename, 'a'))
     ftp.quit()
     driver.close()
     print 'done in tow.'
