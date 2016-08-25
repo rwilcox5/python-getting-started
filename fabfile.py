@@ -47,7 +47,7 @@ def getplayerlist(driver,pagen):
             #print p538prob0
             allpitchers = driver.find_elements_by_class_name("pitcher")
             
-            all538.append([allteams[nstars], p538prob0, allpitchers[0].text, p538prob1, allpitchers[2].text])
+            all538.append([allteams[nstars], p538prob0, str(allpitchers[0].get_attribute('innerHTML')), p538prob1, str(allpitchers[2].get_attribute('innerHTML'))])
 
     teamslist = ['angels','Astros','Athletics','Jays','Braves','Brewers','Cardinals','Cubs','Diamondbacks','Dodgers','Giants','Indians','Mariners','Marlins','Mets','Nationals','Orioles','Padres','Phillies','Pirates','Rangers','Rays','Red Sox','Reds','Rockies','Royals','Tigers','Twins','White Sox','Yankees']
     
@@ -169,11 +169,12 @@ def getplayerlist(driver,pagen):
             nlines = nnlines
             if len(nlines)>4:
                     
-                    #print nlines
+                    print 'a',nlines
                     p1 = str(all538[nstars][2])
                     p2 = str(all538[nstars][4])
                     p1i = p1.find(' ')
                     p2i = p2.find(' ')
+                    print p1, p2
                     if p1i > -1:
                             
                             if p1[:p1i].lower()==nlines[1].lower():
