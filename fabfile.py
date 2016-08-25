@@ -3,14 +3,15 @@ from fabric.api import task
 from ftplib import FTP
 import csv
 import math
-
+import time
 from selenium import webdriver
-#domain name or server ip:
+
 
 
 
 
 def writecsv(parr, filen):
+
         with open(filen, 'wb') as csvfile:
                 spamwriter = csv.writer(csvfile, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
                 for i in range(0,len(parr)):
@@ -23,16 +24,14 @@ def writecsv(parr, filen):
 
 
 
-##This gets all the owners from the conferences to check if sims or not.
-
 def getplayerlist(driver,pagen):
     plist = []
     ap = []
     aparr = []
     pvsa = []
-    allteams = ['Angels','Astros','Athletics','Blue-Jays','Braves','Brewers','Cardinals','Cubs','Diamondbacks','Dodgers','Giants','Indians','Mariners','Marlins','Mets','Nationals','Orioles','Padres','Phillies','Pirates','Rangers','Rays','Red-Sox','Reds','Rockies','Royals','Tigers','Twins','White-Sox','Yankees']
+    allteams = ['angels','Astros','Athletics','Blue-Jays','Braves','Brewers','Cardinals','Cubs','Diamondbacks','Dodgers','Giants','Indians','Mariners','Marlins','Mets','Nationals','Orioles','Padres','Phillies','Pirates','Rangers','Rays','Red-Sox','Reds','Rockies','Royals','Tigers','Twins','White-Sox','Yankees']
     all538 = []
-    for nstars in range(0,10):
+    for nstars in range(0,30):
             allprobsa = []
             allres = []
             alldays = []
@@ -41,15 +40,15 @@ def getplayerlist(driver,pagen):
             allprobs = driver.find_elements_by_class_name("prob")
             proarr = []
             for i in allprobs:
-                    proo = str(i.get_attribute('innerHTML'))
-                    proarr.append(proo)
+                proarr.append(str(i.get_attribute('innerHTML')))
             p538prob0 = 100./int(proarr[0][0:2])
             p538prob1 = 100./int(proarr[2][0:2])
+            #print p538prob0
             allpitchers = driver.find_elements_by_class_name("pitcher")
             
             all538.append([allteams[nstars], p538prob0, allpitchers[0].text, p538prob1, allpitchers[2].text])
 
-    teamslist = ['Angels','Astros','Athletics','Jays','Braves','Brewers','Cardinals','Cubs','Diamondbacks','Dodgers','Giants','Indians','Mariners','Marlins','Mets','Nationals','Orioles','Padres','Phillies','Pirates','Rangers','Rays','Red Sox','Reds','Rockies','Royals','Tigers','Twins','White Sox','Yankees']
+    teamslist = ['angels','Astros','Athletics','Jays','Braves','Brewers','Cardinals','Cubs','Diamondbacks','Dodgers','Giants','Indians','Mariners','Marlins','Mets','Nationals','Orioles','Padres','Phillies','Pirates','Rangers','Rays','Red Sox','Reds','Rockies','Royals','Tigers','Twins','White Sox','Yankees']
     
     b_url = "https://www.5dimes.eu"
     driver.get(b_url)
@@ -72,8 +71,9 @@ def getplayerlist(driver,pagen):
             allrows.append(i)
     allgames = []
     allgamesodds = []
-    for nstars in range(0,10):
+    for nstars in range(0,30):
             nlines = []
+            nnlines = []
             irow = 0
             for eachrow in allrowst:
                     rowstr = eachrow.text
@@ -110,10 +110,13 @@ def getplayerlist(driver,pagen):
                                             nl = float(rstr[rindex-7:rindex])
                                             nlines.append(nl)
                             if nlines[0:1] not in allgames:
+                                    #print 'hj', nlines
                                     allgames.append(nlines[0:1])
-                                    nlines.append(irow)
+                                    nlines.append(0)
                                     nlines.append(mybox)
                                     allgamesodds.append(nlines)
+                                    nnlines = nlines
+                                    #print 'hjj', nlines
                     irow=irow+1
 
             irow = 0
@@ -152,15 +155,20 @@ def getplayerlist(driver,pagen):
                                             nl = float(rstr[rindex-7:rindex])
                                             nlines.append(nl)
                             if nlines[0:1] not in allgames:
+                                    #print 'hjh', nlines
                                     allgames.append(nlines[0:1])
-                                    nlines.append(irow)
+                                    nlines.append(0)
                                     nlines.append(mybox)
                                     allgamesodds.append(nlines)
+                                    nnlines = nlines
+                                    #print 'hjjh', nlines
                     irow=irow+1
                                     
-                            
+            #print "hh", nlines
+            nlines = nnlines
             if len(nlines)>4:
-                    aparr.append(nlines)
+                    
+                    #print nlines
                     p1 = str(all538[nstars][2])
                     p2 = str(all538[nstars][4])
                     p1i = p1.find(' ')
@@ -172,7 +180,7 @@ def getplayerlist(driver,pagen):
                                     nlines.append(all538[nstars][1])
                                     nlines.append(nlines[2]/nlines[5])
                                     if 1./nlines[5]>1./nlines[2]+.01:
-                                            nlines.append((1000*nlines[2]/nlines[5]-1000)/nlines[2])
+                                            nlines.append(min((100*nlines[2]/nlines[5]-100)/nlines[2],10/nlines[2]))
                                     #nlines.append(all538[nstars][2])
                                     #print nlines
                             if p2[:p2i].lower()==nlines[1].lower():
@@ -180,7 +188,7 @@ def getplayerlist(driver,pagen):
                                     nlines.append(all538[nstars][3])
                                     nlines.append(nlines[2]/nlines[5])
                                     if 1./nlines[5]>1./nlines[2]+.01:
-                                            nlines.append((1000*nlines[2]/nlines[5]-1000)/nlines[2])
+                                            nlines.append(min((100*nlines[2]/nlines[5]-100)/nlines[2],10/nlines[2]))
                                     #nlines.append(all538[nstars][4])
                                     #print nlines
                     else:
@@ -189,7 +197,7 @@ def getplayerlist(driver,pagen):
                                     nlines.append(all538[nstars][1])
                                     nlines.append(nlines[2]/nlines[5])
                                     if 1./nlines[5]>1./nlines[2]+.01:
-                                            nlines.append((1000*nlines[2]/nlines[5]-1000)/nlines[2])
+                                            nlines.append(min((100*nlines[2]/nlines[5]-100)/nlines[2],10/nlines[2]))
                                     #nlines.append(all538[nstars][2])
                                     #print nlines
                             if p2.lower()==nlines[1].lower():
@@ -197,13 +205,16 @@ def getplayerlist(driver,pagen):
                                     nlines.append(all538[nstars][3])
                                     nlines.append(nlines[2]/nlines[5])
                                     if 1./nlines[5]>1./nlines[2]+.01:
-                                            nlines.append((1000*nlines[2]/nlines[5]-1000)/nlines[2])
+                                            nlines.append(min((100*nlines[2]/nlines[5]-100)/nlines[2],10/nlines[2]))
                                     #nlines.append(all538[nstars][4])
                                     #print nlines
+                    #print nlines
+                    aparr.append(nlines)
                     if len(nlines)>7:
-                            aparr.append(nlines)
+                            #aparr.append(nlines)
+                            #print 'a', nlines
                             namestr = str(nlines[4])
-                            thebet = float(nlines[7]/10)
+                            thebet = int(nlines[7]*100)/100
                             try:
                                     bidbox = driver.find_element_by_name(namestr)
                                     bidbox.send_keys(str(thebet))
@@ -220,15 +231,19 @@ def getplayerlist(driver,pagen):
 
 @task
 def run_bets():
-    driver = webdriver.PhantomJS()
+    #driver = webdriver.Firefox()
+    driver=webdriver.PhantomJS()
     allplayers = getplayerlist(driver,0)
     ftp = FTP('ftp.byethost24.com')
     ftp.login(user='b24_18788153', passwd = 'ByeTpi3.14')
     ftp.cwd('/htdocs/')
     ftp.retrlines('LIST')
     print 'done in one.'
-    writecsv(allplayers,'allp.csv')
-    filename = "allp.csv"
+    xtime = time.time()
+    writecsv(allplayers,'allp'+str(xtime)+'.csv')
+    filename = 'allp'+str(xtime)+'.csv'
     ftp.storbinary('STOR '+filename, open(filename, 'rb'))
     ftp.quit()
     print 'done in tow.'
+
+#run_bets()
