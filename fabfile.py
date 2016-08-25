@@ -214,7 +214,7 @@ def getplayerlist(driver,pagen):
                             #aparr.append(nlines)
                             #print 'a', nlines
                             namestr = str(nlines[4])
-                            thebet = int(nlines[7]*100)/100
+                            thebet = int(nlines[7]*100)*1./100
                             try:
                                     bidbox = driver.find_element_by_name(namestr)
                                     bidbox.send_keys(str(thebet))
@@ -244,6 +244,7 @@ def run_bets():
     filename = 'allp'+str(xtime)+'.csv'
     ftp.storbinary('STOR '+filename, open(filename, 'rb'))
     ftp.quit()
+    driver.close()
     print 'done in tow.'
 
 #run_bets()
