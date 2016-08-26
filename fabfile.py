@@ -168,7 +168,7 @@ def getplayerlist(driver,pagen):
             #print "hh", nlines
             nlines = nnlines
             if len(nlines)>4:
-                    print ;ha0', nlines
+                    print 'ha0', nlines
                     p1 = str(all538[nstars][2])
                     p2 = str(all538[nstars][4])
                     p1i = p1.find(' ')
