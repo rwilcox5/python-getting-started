@@ -48,7 +48,7 @@ def getplayerlist(driver,pagen):
             allpitchers = driver.find_elements_by_class_name("pitcher")
             
             all538.append([allteams[nstars], p538prob0, str(allpitchers[0].get_attribute('innerHTML')), p538prob1, str(allpitchers[2].get_attribute('innerHTML'))])
-
+    print all538
     teamslist = ['angels','Astros','Athletics','Jays','Braves','Brewers','Cardinals','Cubs','Diamondbacks','Dodgers','Giants','Indians','Mariners','Marlins','Mets','Nationals','Orioles','Padres','Phillies','Pirates','Rangers','Rays','Red Sox','Reds','Rockies','Royals','Tigers','Twins','White Sox','Yankees']
     
     b_url = "https://www.5dimes.eu"
@@ -168,8 +168,7 @@ def getplayerlist(driver,pagen):
             #print "hh", nlines
             nlines = nnlines
             if len(nlines)>4:
-                    
-                    print 'a',nlines
+                    print ;ha0', nlines
                     p1 = str(all538[nstars][2])
                     p2 = str(all538[nstars][4])
                     p1i = p1.find(' ')
@@ -178,6 +177,7 @@ def getplayerlist(driver,pagen):
                     if p1i > -1:
                             
                             if p1[:p1i].lower()==nlines[1].lower():
+                                    print 'ha1'
                                     #nlines.append(all538[nstars][0])
                                     nlines.append(all538[nstars][1])
                                     nlines.append(nlines[2]/nlines[5])
@@ -186,6 +186,7 @@ def getplayerlist(driver,pagen):
                                     #nlines.append(all538[nstars][2])
                                     #print nlines
                             if p2[:p2i].lower()==nlines[1].lower():
+                                    print 'ha2'
                                     #nlines.append(all538[nstars][0])
                                     nlines.append(all538[nstars][3])
                                     nlines.append(nlines[2]/nlines[5])
@@ -195,6 +196,7 @@ def getplayerlist(driver,pagen):
                                     #print nlines
                     else:
                             if p1.lower()==nlines[1].lower():
+                                    print 'ha3'
                                     #nlines.append(all538[nstars][0])
                                     nlines.append(all538[nstars][1])
                                     nlines.append(nlines[2]/nlines[5])
@@ -203,6 +205,7 @@ def getplayerlist(driver,pagen):
                                     #nlines.append(all538[nstars][2])
                                     #print nlines
                             if p2.lower()==nlines[1].lower():
+                                    print 'ha4'
                                     #nlines.append(all538[nstars][0])
                                     nlines.append(all538[nstars][3])
                                     nlines.append(nlines[2]/nlines[5])
