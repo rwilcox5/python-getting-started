@@ -248,7 +248,7 @@ def run_bets():
 
     writecsv(allplayers,'allp'+'.csv')
     filename = 'allp'+'.csv'
-    ftp.storbinary('STOR '+filename, open(filename, 'a'))
+    ftp.storbinary('STOR '+filename, open(filename, 'wb'))
     ftp.quit()
     driver.close()
     print 'done in tow.'
