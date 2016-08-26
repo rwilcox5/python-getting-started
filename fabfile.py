@@ -203,7 +203,7 @@ def getplayerlist(driver,pagen):
                                     if 1./nlines[5]>1./nlines[2]+.01:
                                             nlines.append(min((100*nlines[2]/nlines[5]-100)/nlines[2],10/nlines[2]))
                                     #nlines.append(all538[nstars][2])
-                                    #print nlines
+                                    print 'ha33', nlines
                             if p2.lower()==nlines[1].lower():
                                     print 'ha4'
                                     #nlines.append(all538[nstars][0])
@@ -212,7 +212,7 @@ def getplayerlist(driver,pagen):
                                     if 1./nlines[5]>1./nlines[2]+.01:
                                             nlines.append(min((100*nlines[2]/nlines[5]-100)/nlines[2],10/nlines[2]))
                                     #nlines.append(all538[nstars][4])
-                                    #print nlines
+                                    print 'ha44', nlines
                     #print nlines
                     nlines0 = [xtime]
                     for iin in nlines:
