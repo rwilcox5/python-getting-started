@@ -240,9 +240,9 @@ def run_bets():
     #driver = webdriver.Firefox()
     driver=webdriver.PhantomJS()
     allplayers = getplayerlist(driver,0)
-    ftp = FTP('ftp.byethost24.com')
-    ftp.login(user='b24_18788153', passwd = 'ByeTpi3.14')
-    ftp.cwd('/htdocs/')
+    ftp = FTP('xo6.x10hosting.com')
+    ftp.login(user='shiohx10', passwd = 'X10password')
+    ftp.cwd('/public_html/')
     ftp.retrlines('LIST')
     print 'done in one.'
 
