@@ -12,7 +12,7 @@ from selenium import webdriver
 
 def writecsv(parr, filen):
 
-        with open(filen, 'a') as csvfile:
+        with open(filen, 'wb') as csvfile:
                 spamwriter = csv.writer(csvfile, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
                 for i in range(0,len(parr)):
                         try:
